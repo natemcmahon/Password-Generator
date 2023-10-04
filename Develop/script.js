@@ -6,13 +6,11 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var password = generatePassword(selectionArray);
   var passwordText = document.querySelector("#password");
   passwordText.setAttribute("placeholder", generatedPassword);
 
   passwordText.value = password;
-  // console.log(password);
-
 }
 
 // Add event listener to generate button
@@ -77,23 +75,27 @@ RanArraySelection = function(array) {
 var passwordArray = [];
 var generatedPassword = "";
 
-// Push random char from charChoices one at a time to passwordArray
-for (i = 0 ; i < passwordRange ; i++) {
-  passwordArray.push(RanArraySelection(selectionArray));
+function generatePassword(array){
+
+  // Push random char from charChoices one at a time to passwordArray
+  for (i = 0 ; i < passwordRange ; i++) {
+    passwordArray.push(RanArraySelection(selectionArray));
+  }
+
+  // Convert passwordArray to string and set in tempString
+  var tempString = passwordArray.toString();
+
+  // comma remover
+  for (i = 0 ; i < tempString.length ; i++) {
+    tempString = tempString.replace(",","");
+  }
+
+  // Set tempString as password - might be able to set as password from the start
+  generatedPassword = tempString;
+
+  // console.log("Your password is: " + generatedPassword);
+
+  return generatedPassword;
 }
 
-// Convert passwordArray to string and set in tempString
-var tempString = passwordArray.toString();
-
-// comma remover
-for (i = 0 ; i < tempString.length ; i++) {
-  tempString = tempString.replace(",","");
-}
-
-// Set tempString as password - might be able to set as password from the start
-generatedPassword = tempString;
-
-console.log("Your password is: " + generatedPassword);
-
-// generatePassword();
-// writePassword();
+writePassword();
