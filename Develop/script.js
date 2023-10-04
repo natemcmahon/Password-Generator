@@ -16,6 +16,11 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
+// Ask user what character types they'd like to include in their password
+var lowerCharBool = confirm("Would you like to include lowercase letters in your randomly generated password? If so, select 'confirm': \n\nFor reference: {abcdefghijklmnopqrstuvwxyz}");
+var upperCharBool = confirm("Would you like to include uppercase letters in your randomly generated password? If so, select 'confirm': \n\nFor reference: {ABCDEFGHIJKLMNOPQRSTUVWXYZ}");
+var numCharBool = confirm("Would you like to include numbers in your randomly generated password? If so, select 'confirm': \n\nFor reference: {0123456789}");
+var specialCharBool = confirm("Would you like to include special characters in your randomly generated password? If so, select 'confirm': \n\nFor reference: {~!@#$%^&*()-+=?><,.:;}");
 
  // Pass function an int, receive back a random int of that length
  var input = prompt("Enter the length you'd like your random password to be, 8-128 characters.");
@@ -24,15 +29,19 @@ generateBtn.addEventListener("click", writePassword);
  console.log(typeof passwordRange);
  console.log(passwordRange);
 
-// MOST LIKELY DELETE 
-//  RandomNum = function() {
-//     var ranNum = (Math.round(Math.floor(121) * Math.random())) + 7;
-//     // var ranNum = (array[parseInt(multiplier)]) + 7;
-//     return ranNum;
-//   }
 
 // Character options for password
 var charChoices = ["A", "B", "C", "D","E","F","G"];
+// var upperCharArray = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+var upperCharString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var lowerCharString = "abcdefghijklmnopqrstuvwxyz";
+var numString = "0123456789";
+var speCharString = "~!@#$%^&*()-+=?><,.:;";
+
+// Initialize empty string which we will concat user's selections into
+var selectionString = "";
+
+// :)
     
 // Random choice of charChoices
 RanArraySelection = function(array) {
@@ -44,7 +53,7 @@ RanArraySelection = function(array) {
 
 // Placeholder initializations for our for loops
 var passwordArray = [];
-var password = "";
+var generatedPassword = "";
 
 // Push random char from charChoices one at a time to passwordArray
 for (i = 0 ; i < passwordRange ; i++) {
@@ -60,6 +69,6 @@ for (i = 0 ; i < tempString.length ; i++) {
 }
 
 // Set tempString as password - might be able to set as password from the start
-password = tempString;
+generatedPassword = tempString;
 
-console.log("Your password is: " + password);
+console.log("Your password is: " + generatedPassword);
