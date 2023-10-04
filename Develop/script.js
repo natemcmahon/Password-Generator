@@ -18,10 +18,10 @@ generateBtn.addEventListener("click", writePassword);
 // Ask user what character types they'd like to include in their password
 // logic check loop to make sure they confirmed at least one charTypeArray
 while (looper) {
-  var lowerCharBool = confirm("Would you like to include lowercase letters in your randomly generated password? If so, select 'confirm': \n\nFor reference: {abcdefghijklmnopqrstuvwxyz}");
-  var upperCharBool = confirm("Would you like to include uppercase letters in your randomly generated password? If so, select 'confirm': \n\nFor reference: {ABCDEFGHIJKLMNOPQRSTUVWXYZ}");
-  var numCharBool = confirm("Would you like to include numbers in your randomly generated password? If so, select 'confirm': \n\nFor reference: {0123456789}");
-  var specialCharBool = confirm("Would you like to include special characters in your randomly generated password? If so, select 'confirm': \n\nFor reference: {~!@#$%^&*()-+=?><,.:;}");
+  var lowerCharBool = confirm("Would you like to include lowercase letters in your randomly generated password? If so, select 'OK' if not select 'Cancel': \n\nFor reference: {abcdefghijklmnopqrstuvwxyz}");
+  var upperCharBool = confirm("Would you like to include uppercase letters in your randomly generated password? If so, select 'OK' if not select 'Cancel': \n\nFor reference: {ABCDEFGHIJKLMNOPQRSTUVWXYZ}");
+  var numCharBool = confirm("Would you like to include numbers in your randomly generated password? If so, select 'OK' if not select 'Cancel': \n\nFor reference: {0123456789}");
+  var specialCharBool = confirm("Would you like to include special characters in your randomly generated password? If so, select 'OK' if not select 'Cancel': \n\nFor reference: {~!@#$%^&*()-+=?><,.:;}");
   if ((lowerCharBool === false) && (upperCharBool === false) && (numCharBool === false) && (specialCharBool === false)) {
     alert("You can't have a password if you don't allow me to use any characters! Try again!");
   }
