@@ -1,5 +1,5 @@
 // Assignment code here
-
+var looper = true;
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -8,8 +8,10 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
+  passwordText.setAttribute("placeholder", generatedPassword);
 
   passwordText.value = password;
+  // console.log(password);
 
 }
 
@@ -17,32 +19,53 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 // Ask user what character types they'd like to include in their password
-var lowerCharBool = confirm("Would you like to include lowercase letters in your randomly generated password? If so, select 'confirm': \n\nFor reference: {abcdefghijklmnopqrstuvwxyz}");
-var upperCharBool = confirm("Would you like to include uppercase letters in your randomly generated password? If so, select 'confirm': \n\nFor reference: {ABCDEFGHIJKLMNOPQRSTUVWXYZ}");
-var numCharBool = confirm("Would you like to include numbers in your randomly generated password? If so, select 'confirm': \n\nFor reference: {0123456789}");
-var specialCharBool = confirm("Would you like to include special characters in your randomly generated password? If so, select 'confirm': \n\nFor reference: {~!@#$%^&*()-+=?><,.:;}");
+// logic check loop to make sure they confirmed at least one charTypeArray
+while (looper) {
+  var lowerCharBool = confirm("Would you like to include lowercase letters in your randomly generated password? If so, select 'confirm': \n\nFor reference: {abcdefghijklmnopqrstuvwxyz}");
+  var upperCharBool = confirm("Would you like to include uppercase letters in your randomly generated password? If so, select 'confirm': \n\nFor reference: {ABCDEFGHIJKLMNOPQRSTUVWXYZ}");
+  var numCharBool = confirm("Would you like to include numbers in your randomly generated password? If so, select 'confirm': \n\nFor reference: {0123456789}");
+  var specialCharBool = confirm("Would you like to include special characters in your randomly generated password? If so, select 'confirm': \n\nFor reference: {~!@#$%^&*()-+=?><,.:;}");
+  if ((lowerCharBool === false) && (upperCharBool === false) && (numCharBool === false) && (specialCharBool === false)) {
+    alert("You can't have a password if you don't allow me to use any characters! Try again!");
+  }
+  else {
+    looper = false;
+  }
+}
 
- // Pass function an int, receive back a random int of that length
- var input = prompt("Enter the length you'd like your random password to be, 8-128 characters.");
- var passwordRange = parseInt(input);
- console.log(typeof input);
- console.log(typeof passwordRange);
- console.log(passwordRange);
-
-
-// Character options for password
+ // Placeholder Character options for password
 var charChoices = ["A", "B", "C", "D","E","F","G"];
+
 // var upperCharArray = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 var upperCharString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var lowerCharString = "abcdefghijklmnopqrstuvwxyz";
 var numString = "0123456789";
-var speCharString = "~!@#$%^&*()-+=?><,.:;";
+var specialCharString = "~!@#$%^&*()-+=?><,.:;";
 
 // Initialize empty string which we will concat user's selections into
 var selectionString = "";
 
-// :)
+// concatenate charTypeArrays into charChoices based on windows confirms (user input) above
+if (lowerCharBool){
+  selectionString = selectionString.concat(lowerCharString);
+}
+if (upperCharBool){
+  selectionString = selectionString.concat(upperCharString);
+}
+if (numCharBool){
+  selectionString = selectionString.concat(numString);
+}
+if (specialCharBool){
+  selectionString = selectionString.concat(specialCharString);
+}
     
+// Convert selectionString to type charArray to be passed into our password randomizer
+var selectionArray = Array.from(selectionString);
+
+// Pass function an int, receive back a random int of that length
+var input = prompt("Enter the length you'd like your random password to be, 8-128 characters.");
+var passwordRange = parseInt(input);
+
 // Random choice of charChoices
 RanArraySelection = function(array) {
     var multiplier = Math.floor(array.length) * Math.random();
@@ -50,14 +73,13 @@ RanArraySelection = function(array) {
   return ranNum;
   }
     
-
 // Placeholder initializations for our for loops
 var passwordArray = [];
 var generatedPassword = "";
 
 // Push random char from charChoices one at a time to passwordArray
 for (i = 0 ; i < passwordRange ; i++) {
-  passwordArray.push(RanArraySelection(charChoices));
+  passwordArray.push(RanArraySelection(selectionArray));
 }
 
 // Convert passwordArray to string and set in tempString
@@ -72,3 +94,6 @@ for (i = 0 ; i < tempString.length ; i++) {
 generatedPassword = tempString;
 
 console.log("Your password is: " + generatedPassword);
+
+// generatePassword();
+// writePassword();
