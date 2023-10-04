@@ -1,5 +1,6 @@
-// Assignment code here
+// Placeholder initializations for our for loops
 var looper = true;
+var generatedPassword = "";
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -8,9 +9,7 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword(selectionArray);
   var passwordText = document.querySelector("#password");
-  passwordText.setAttribute("placeholder", generatedPassword);
-
-  passwordText.value = password;
+  passwordText.setAttribute("placeholder", password);
 }
 
 // Add event listener to generate button
@@ -30,9 +29,6 @@ while (looper) {
     looper = false;
   }
 }
-
- // Placeholder Character options for password
-var charChoices = ["A", "B", "C", "D","E","F","G"];
 
 // var upperCharArray = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 var upperCharString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -64,18 +60,19 @@ var selectionArray = Array.from(selectionString);
 var input = prompt("Enter the length you'd like your random password to be, 8-128 characters.");
 var passwordRange = parseInt(input);
 
-// Random choice of charChoices
+
+// Random choice of array, will pass it our selection array based on user criteria
 RanArraySelection = function(array) {
     var multiplier = Math.floor(array.length) * Math.random();
     var ranNum = array[parseInt(multiplier)]
   return ranNum;
   }
-    
-// Placeholder initializations for our for loops
-var passwordArray = [];
-var generatedPassword = "";
 
 function generatePassword(array){
+  
+  // Initialize passwordArray as empty
+  // Initializing inside the function allows us to re generate password
+  var passwordArray = [];
 
   // Push random char from charChoices one at a time to passwordArray
   for (i = 0 ; i < passwordRange ; i++) {
@@ -93,9 +90,5 @@ function generatePassword(array){
   // Set tempString as password - might be able to set as password from the start
   generatedPassword = tempString;
 
-  // console.log("Your password is: " + generatedPassword);
-
   return generatedPassword;
 }
-
-writePassword();
